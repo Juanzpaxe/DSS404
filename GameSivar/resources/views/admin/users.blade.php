@@ -1,6 +1,3 @@
-@vite('resources/css/app.css')
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -90,57 +87,77 @@
             </tr>
         </thead>
         <tbody>
-                <td class="px-4 py-2 text-left align-top w-1/2 text-lg">
-                    <div>
-                        <div class="overflow-x-auto text-white">
-                            <table class="table">
-                              <!-- head -->
-                              <thead>
-                                <tr>
-                                  <th>ID</th>
-                                  <th>Nombre</th>
-                                  <th>Apellido</th>
-                                  <th>Telefono</th>
-                                  <th>Fecha</th>
-                                  <th>Email</th>
-                                  <th>Fecha de creacion</th>
-                                  <th>Fecha de modificacion</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                @foreach($users as $user)
-                                <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->lastname }}</td>
-                                    <td>{{ $user->phone }}</td>
-                                    <td>{{ $user->birth }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->created_at }}</td>
-                                    <td>{{ $user->updated_at }}</td>
-                                </tr>
-                                @endforeach
-                              </tbody>
-                            </table>
-                          </div>
-                    </div>
+            @foreach($users as $user)
+            <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->name }}</td>
+                <td>{{ $user->lastname }}</td>
+                <td>{{ $user->phone }}</td>
+                <td>{{ $user->birth }}</td>
+                <td>{{ $user->email }}</td>
+                <td>{{ $user->created_at }}</td>
+                <td>{{ $user->updated_at }}</td>
+                <td>
+                    <button class="btn btn-info text-white" onclick="openEditForm('{{ $user->id }}')">Editar</button>
                 </td>
+                <td>
+                    <button class="btn btn-error text-white">Eliminar</button>
+                </td>
+            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
- </div>
+
+<!-- Formulario de Edición (Popup) -->
+<div id="editForm" class="fixed z-10 inset-0 overflow-y-auto hidden">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center">
+        <!-- Capa de fondo -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    
+        <!-- Contenedor del formulario -->
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <!-- Contenido del formulario -->
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg font-medium leading-6 text-gray-900" id="editFormTitle">
+                            Editar Usuario
+                        </h3>
+                        <div class="mt-2">
+                            <!-- Aquí puedes incluir tu formulario de edición -->
+                            <!-- Por ejemplo, podrías incluir campos para editar el nombre, apellido, teléfono, etc. -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Botones de acción -->
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" onclick="closeEditForm()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    Guardar Cambios
+                </button>
+                <button type="button" onclick="closeEditForm()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
 </body>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var menuButton = document.getElementById('menu-button');
-        var sidebar = document.getElementById('sidebar');
+    function openEditForm(userId) {
+        // Aquí puedes cargar los datos del usuario correspondiente al ID y mostrarlos en el formulario
+        // Por ejemplo, podrías hacer una solicitud AJAX para obtener los datos del usuario y luego llenar los campos del formulario
+        document.getElementById('editForm').classList.remove('hidden');
+    }
 
-        menuButton.addEventListener('click', function() {
-            sidebar.classList.toggle('hidden');
-            sidebar.classList.toggle('lg:block');
-        });
-    });
+    function closeEditForm() {
+        document.getElementById('editForm').classList.add('hidden');
+    }
 </script>
 
 </html>
