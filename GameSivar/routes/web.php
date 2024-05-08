@@ -21,11 +21,14 @@ Route::get('/', function () {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/admin/users', [UserAdminController::class, 'index'])->name('admin.users');
     
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
+=======
+>>>>>>> parent of 73ee3ca (Admin 0.1)
 =======
 >>>>>>> parent of 73ee3ca (Admin 0.1)
 
