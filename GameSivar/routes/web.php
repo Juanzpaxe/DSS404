@@ -4,10 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TarjetaController;
 use App\Http\Controllers\EmpleadoController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Admin\UserAdminController;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +20,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+<<<<<<< HEAD
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/admin/users', [UserAdminController::class, 'index'])->name('admin.users');
     
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
+=======
+>>>>>>> parent of 73ee3ca (Admin 0.1)
 
 Route::get('/tarjetas/index',[TarjetaController::class,'index'])->name('tarjetas.index');
 
